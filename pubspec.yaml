@@ -1,0 +1,56 @@
+name: employee_app
+description: A new Flutter project.
+
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  cupertino_icons: ^1.0.2
+  intl: ^0.17.0
+  get_storage: ^2.0.2
+  get: ^4.1.4
+  http: ^0.13.3
+  flutter_svg: ^0.22.0
+  flutter_easyloading: ^3.0.0
+  pull_to_refresh: ^2.0.0
+  flutter_flavorizr: ^2.0.0
+  percent_indicator: ^3.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    
+flutter: 
+
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/images/svg/
+    
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Black.ttf
+        - asset: assets/fonts/Roboto-BlackItalic.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto-BoldCondensed.ttf
+        - asset: assets/fonts/Roboto-BoldCondensedItalic.ttf
+        - asset: assets/fonts/Roboto-BoldItalic.ttf
+        - asset: assets/fonts/Roboto-Condensed.ttf
+        - asset: assets/fonts/Roboto-CondensedItalic.ttf
+        - asset: assets/fonts/Roboto-Italic.ttf
+        - asset: assets/fonts/Roboto-Light.ttf
+        - asset: assets/fonts/Roboto-LightItalic.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+        - asset: assets/fonts/Roboto-MediumItalic.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Thin.ttf
+        - asset: assets/fonts/Roboto-ThinItalic.ttf
+    
