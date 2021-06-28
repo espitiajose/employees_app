@@ -5,22 +5,26 @@ class Validator {
     {
       bool? require, 
       bool? email, 
+      bool? accents = true, 
       double? min, 
       double? max, 
       int? minLength, 
       int? maxLenth, 
       ValidatorCompare? compare,
-      List<String? Function(String? value)?>? customs
+      String? custom
     }
   ){
 
     final regexEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    final regexAccents = RegExp(r"[^A-Za-z0-9]+");
 
     if(value == null) return 'Este campo debe ser diligenciado';
 
     if(require == true && value.isEmpty) return 'Este campo debe ser diligenciado';
 
     if(email == true && !regexEmail.hasMatch(value)) return 'Ingrese un email válido';
+
+    if(!(accents ?? false) && regexAccents.hasMatch(value)) return 'No se permiten acentos';
 
     if(min != null){
       try {
@@ -44,12 +48,7 @@ class Validator {
 
     if(compare != null && compare.value != value) return compare.textResult ?? 'Los campos debe ser iguales';
 
-    if(customs != null && customs.length > 0){
-      for (var fun in customs) {
-        String? result = fun?.call(value);
-        if(result != null) return result;
-      }
-    }
+    if(custom != null) return custom;
   }
 
   

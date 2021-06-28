@@ -74,7 +74,7 @@ class ShowDialog {
                   Button(
                     text: 'Cerrar',
                     outline: true,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
                     textStyle: Theme.of(context).textTheme.button?.copyWith(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
                     onPressed: () => Navigator.pop(context),
                   )

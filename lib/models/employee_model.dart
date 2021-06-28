@@ -1,5 +1,10 @@
 
 
+import 'package:employee_app/models/enums/area_enum.dart';
+import 'package:employee_app/models/enums/country_enum.dart';
+import 'package:employee_app/models/enums/documentType_enum.dart';
+import 'package:intl/intl.dart';
+
 class EmployeeModel {
     EmployeeModel({
         required this.surname,
@@ -21,10 +26,10 @@ class EmployeeModel {
     final String secondSurname;
     final String firstName;
     final String secondName;
-    final String country;
-    final String documentType;
+    final CountryEnum country;
+    final DocumentTypeEnum documentType;
     final String document;
-    final String area;
+    final AreaEnum area;
     final int dateOfAdmission;
     final String? id;
     final String? email;
@@ -39,11 +44,11 @@ class EmployeeModel {
         String? secondSurname,
         String? firstName,
         String? secondName,
-        String? country,
-        String? documentType,
+        CountryEnum? country,
+        DocumentTypeEnum? documentType,
         String? document,
         int? dateOfAdmission,
-        String? area,
+        AreaEnum? area,
         String? email,
     }) => 
         EmployeeModel(
@@ -70,11 +75,11 @@ class EmployeeModel {
         secondSurname: json["secondSurname"],
         firstName: json["first_name"],
         secondName: json["second_name"],
-        country: json["country"],
-        documentType: json["documentType"],
+        country: countryEnumValues.map[json["country"]]?.value,
+        documentType: documentsTypeEnumValues.map[json["documentType"]]?.value,
         document: json["document"],
         dateOfAdmission: json["dateOfAdmission"],
-        area: json["area"],
+        area: areaEnumValues.map[json["area"]]?.value,
         email: json["email"],
     );
 
@@ -86,11 +91,11 @@ class EmployeeModel {
         "secondSurname": secondSurname,
         "first_name": firstName,
         "second_name": secondName,
-        "country": country,
-        "documentType": documentType,
+        "country": countryEnumValues.reverse[country],
+        "documentType": documentsTypeEnumValues.reverse[documentType],
         "document": document,
         "dateOfAdmission": dateOfAdmission,
-        "area": area,
+        "area": areaEnumValues.reverse[area],
         "email": email,
     };
 
@@ -99,10 +104,26 @@ class EmployeeModel {
         "secondSurname": secondSurname,
         "first_name": firstName,
         "second_name": secondName,
-        "country": country,
-        "documentType": documentType,
+        "country": countryEnumValues.reverse[country],
+        "documentType": documentsTypeEnumValues.reverse[documentType],
         "document": document,
         "dateOfAdmission": dateOfAdmission,
-        "area": area,
+        "area": areaEnumValues.reverse[area],
     };
+
+    String get name {
+      return '$firstName $surname';
+    }
+
+    String get doc {
+      return '${documentsTypeEnumValues.reverse[documentType]} $document';
+    }
+
+    String get proffesionalArea{
+      return '${areaEnumValues.reverseName(area)}';
+    }
+
+    String get dateOfAdmissionFormatted {
+      return DateFormat('yyyy-MM-dd').format(DateTime.fromMillisecondsSinceEpoch(dateOfAdmission));
+    }
 }

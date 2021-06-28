@@ -1,5 +1,7 @@
 import 'package:employee_app/styles/empColors.dart';
 import 'package:employee_app/styles/empSharedStyles.dart';
+import 'package:employee_app/ui/pages/app/actives/active_page.dart';
+import 'package:employee_app/ui/pages/app/inactives/inactive_page.dart';
 import 'package:employee_app/ui/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -18,7 +20,7 @@ class _AppPageState extends State<AppPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110),
+        preferredSize: Size.fromHeight(115),
         child: Head(isActives: currentIndex == 0,),
       ),
       body: Stack(
@@ -27,7 +29,8 @@ class _AppPageState extends State<AppPage> {
             child: Align(
               alignment: Alignment.topCenter,
               child: Container(
-                color: Colors.white,
+                padding: EdgeInsets.only(bottom: 100),
+                color: Colors.grey.withOpacity(.1),
                 child: child,
               ),
             ),
@@ -73,7 +76,13 @@ class _AppPageState extends State<AppPage> {
   }
 
   Widget get child {
-    return SizedBox();
+    switch(currentIndex){
+      case 0:
+       return ActivePage(); 
+      case 1:
+      default:
+        return InactivePage();
+    }
   }
 
   changeOption(int index) {
@@ -97,11 +106,11 @@ class Head extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       actions: [
-        IconButton(
-          icon: Icon(Icons.add_circle_sharp, color: Theme.of(context).accentColor, size: 30),
+        EmpIconButton(
+          action: add,
           tooltip: 'Agregar empleado',
-          onPressed: add,
-        ),
+          icon: Icon(Icons.add, color: Colors.white, size: 25),
+        )
       ],
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(60),

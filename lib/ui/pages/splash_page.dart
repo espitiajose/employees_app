@@ -1,13 +1,19 @@
+import 'package:employee_app/controllers/employee_controller.dart';
 import 'package:employee_app/helpers/empImages.dart';
 import 'package:employee_app/styles/empSharedStyles.dart';
 import 'package:employee_app/ui/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
 
+  final x = Get.put(EmployeeController());
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Container(

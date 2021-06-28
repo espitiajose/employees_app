@@ -1,6 +1,7 @@
 import 'package:employee_app/styles/empColors.dart';
 import 'package:employee_app/ui/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Input extends StatefulWidget {
 
@@ -18,6 +19,7 @@ class Input extends StatefulWidget {
   final Function(String)? onChanged;
   final FocusNode? focusNode;
   final bool enabled;
+  final DateTime? firstDate;
 
   const Input({
     Key? key,
@@ -34,7 +36,8 @@ class Input extends StatefulWidget {
     this.onTap,
     this.onChanged,
     this.focusNode,
-    this.enabled = true
+    this.enabled = true,
+    this.firstDate
   }) : super(key: key);
 
   @override
@@ -96,7 +99,10 @@ class _InputState extends State<Input> {
             setState(() {this.value = value;});
             if(widget.onChanged != null) widget.onChanged!(value);
           },
-          onTap: widget.onTap,
+          onTap: () {
+            if(widget.type == TextInputType.datetime) return openPickerDate();
+            if(widget.onTap != null) widget.onTap!();
+          },
           focusNode: widget.focusNode,
         ),
       ],
@@ -145,5 +151,17 @@ class _InputState extends State<Input> {
       borderRadius: BorderRadius.all(Radius.circular(5)),
       borderSide: BorderSide(width: 1, color: EmpColors.graySide)
     );
+  }
+
+  openPickerDate() async {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: widget.firstDate ?? DateTime.now().subtract(Duration(days: 365 * 100)),
+      lastDate: DateTime.now()
+    );
+    if(picked != null) widget.controller.text = DateFormat('yyyy-MM-dd').format(picked);
+    setState(() {});
   }
 }

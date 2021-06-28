@@ -12,5 +12,5 @@ class EmpColors {
   static const Color blueFacebook = Color(0xff415794);
   static const Color grayLabel = Color(0xff616161);
   static const Color graySide = Color(0xffb3b3b3);
-  static const Color grayBackground = Color(0xffF8F8F8);
+  static const Color grayBackground = Color(0xffF9F9F9);
 }

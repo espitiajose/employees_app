@@ -28,9 +28,9 @@ class Enviroment {
   static String get apiUrl {
     switch (appFlavor) {
       case Flavor.PROD:
-        return 'https://cidenetapi.herokuapp.com/api/v1/';
+        return 'https://cidenetapi.herokuapp.com/api/v1';
       case Flavor.DEV:
-        return 'http://localhost:8080/api/v1/';
+        return 'http://localhost:8080/api/v1';
     }
   }
 

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class DropDown extends StatefulWidget {
 
-  final String? inputName;
+  final String? label;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   final TextStyle? fontStyle;
@@ -17,7 +17,7 @@ class DropDown extends StatefulWidget {
   const DropDown({
     Key? key,
     required this.controlller,
-    this.inputName,
+    this.label,
     this.padding,
     this.margin,
     this.fontStyle,
@@ -37,33 +37,46 @@ class _DropDownState extends State<DropDown> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: this.widget.margin ?? EdgeInsets.symmetric(vertical: 10),
-      constraints: BoxConstraints(minWidth: 100),
-      child: DropdownButtonFormField<String>(
-        validator: (value){
-          if(this.widget.validator != null) {
-            setState(() {isError = this.widget.validator!(value) != null;});
-            return this.widget.validator!(value);
-          }
-        },
-        decoration: InputDecoration(
-          border: border,
-          enabledBorder: border,
-          focusedBorder: border,
-          contentPadding: this.widget.padding ?? EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-          errorStyle: !widget.isTextValidator ? TextStyle(height: 0) : Theme.of(context).textTheme.overline?.copyWith(color: Theme.of(context).errorColor, fontWeight: FontWeight.w500),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        widget.label == null ? SizedBox() :
+        Label(
+          text: widget.label!,
+          margin:EdgeInsets.symmetric(vertical: 10),
+          style: Theme.of(context).textTheme.overline?.copyWith(
+            color: !isError ? Colors.black : Theme.of(context).errorColor,
+            fontWeight: FontWeight.w300,
+          ),
         ),
-        value: widget.controlller.value,
-        hint: _Item(text: widget.placeholder ?? 'Seleccione item', isHint: true),
-        icon: Icon(Icons.keyboard_arrow_down, size: 8, color: Theme.of(context).primaryColorDark),
-        iconEnabledColor: Theme.of(context).primaryColor,
-        iconSize: 30,
-        isExpanded: true,
-        onChanged: (value) => setState(() {FocusScope.of(context).requestFocus(new FocusNode()); widget.controlller.value = value;}),
-        dropdownColor: Colors.white,
-        items: dropItems,
-      ),
+        Container(
+          constraints: BoxConstraints(minWidth: 100),
+          child: DropdownButtonFormField<String>(
+            validator: (value){
+              if(this.widget.validator != null) {
+                setState(() {isError = this.widget.validator!(value) != null;});
+                return this.widget.validator!(value);
+              }
+            },
+            decoration: InputDecoration(
+              border: border,
+              enabledBorder: border,
+              focusedBorder: border,
+              contentPadding: this.widget.padding ?? EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              errorStyle: Theme.of(context).textTheme.overline?.copyWith(color: Theme.of(context).errorColor, fontWeight: FontWeight.w500),
+            ),
+            value: widget.controlller.value,
+            hint: _Item(text: widget.placeholder ?? 'Seleccione aquí', isHint: true),
+            icon: Icon(Icons.keyboard_arrow_down, size: 8, color: Theme.of(context).primaryColorDark),
+            iconEnabledColor: Theme.of(context).primaryColor,
+            iconSize: 30,
+            isExpanded: true,
+            onChanged: (value) => setState(() {FocusScope.of(context).requestFocus(new FocusNode()); widget.controlller.value = value;}),
+            dropdownColor: Colors.white,
+            items: dropItems,
+          ),
+        ),
+      ],
     );
   }
 
