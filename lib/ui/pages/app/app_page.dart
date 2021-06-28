@@ -29,7 +29,7 @@ class _AppPageState extends State<AppPage> {
             child: Align(
               alignment: Alignment.topCenter,
               child: Container(
-                padding: EdgeInsets.only(bottom: 100),
+                padding: EdgeInsets.only(bottom: 70),
                 color: Colors.grey.withOpacity(.1),
                 child: child,
               ),
