@@ -51,7 +51,7 @@ class _AddPageState extends State<AddPage> {
             preferredSize: Size.fromHeight(0),
             child: Label(
               width: double.infinity,
-              text: "Nuevo empleado", 
+              text: "${currentEmployee != null ? 'Actualizar': 'Nuevo'} empleado", 
               margin: EdgeInsets.only(left: 10, bottom: 10),
               style: Theme.of(context).textTheme.headline2?.copyWith(
                 color: Theme.of(context).primaryColorDark, 
